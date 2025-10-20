@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
-    [SerializeField] private float size;
+    private float size;
     [SerializeField] private LayerMask groundLayer;
 
     [SerializeField] private float bufferDistance;

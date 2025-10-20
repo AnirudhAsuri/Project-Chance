@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SwitchHandler : MonoBehaviour
 {
     [SerializeField] private string playerTag = "Player";
+    public UnityEvent switchTriggerEvent;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -14,6 +16,6 @@ public class SwitchHandler : MonoBehaviour
 
     public void HandleSwitchTrigger()
     {
-        Debug.Log("Trigger Called");
+        switchTriggerEvent.Invoke();
     }
 }

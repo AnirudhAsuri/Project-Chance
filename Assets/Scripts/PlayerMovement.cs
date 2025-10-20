@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Jump()
-    { 
+    {
         if(coyoteTimeCounter > 0f && jumpBufferCounter > 0f)
         {
             playerRigidBody.linearVelocityY += jumpForce;
@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        HandlePlayerMovement();
+        HandlePlayerMovementV2();
         HandleGravity();
         Jump();
     }
@@ -94,20 +94,20 @@ public class PlayerMovement : MonoBehaviour
 
             playerRigidBody.linearVelocityX = Mathf.Clamp(playerRigidBody.linearVelocityX, -maxSpeed, maxSpeed);
         }
-        else if(playerRigidBody.linearVelocityX != 0)
+        else if(playerRigidBody.linearVelocityX != 0 && isGrounded)
         {
             playerRigidBody.linearVelocityX = Mathf.MoveTowards(playerRigidBody.linearVelocityX, 0f, deceleration * Time.deltaTime);
         }
         else
         {
-            playerRigidBody.linearVelocityX = 0f;
+            if(isGrounded)
+                playerRigidBody.linearVelocityX = 0f;
         }
     }
 
-    /*private void HandlePlayerMovementV2()
+    private void HandlePlayerMovementV2()
     {
         Debug.DrawRay(transform.position, playerRigidBody.linearVelocity.normalized, Color.blue);
-        Debug.Log(playerRigidBody.linearVelocityX);
 
         if (movementInput.magnitude > 0.1f)
         {
@@ -129,19 +129,25 @@ public class PlayerMovement : MonoBehaviour
             else if (alignment < -0.75f)
             {
                 excessSpeed = Mathf.Abs(playerRigidBody.linearVelocityX);
+                
+                if(!isGrounded)
+                {
+                    excessSpeed = Mathf.Abs(playerRigidBody.linearVelocityX / 3);
+                }
+
                 ApplyBrake(excessSpeed);
             }
         }
 
         else
         {
-            if (playerRigidBody.linearVelocityX != 0)
+            if (playerRigidBody.linearVelocityX != 0 && isGrounded)
             {
                 excessSpeed = Mathf.Abs(playerRigidBody.linearVelocityX);
                 ApplyBrake(excessSpeed);
             }
         }
-    }*/
+    }
 
     private void ApplyBrake(float speed)
     {
