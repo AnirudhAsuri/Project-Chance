@@ -22,6 +22,10 @@ public class PlayerHealth : MonoBehaviour
         {
             certaintyCells[i].sprite = fullCell;
         }
-        
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentCertaintyCells -= damage;
     }
 }
