@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 public class ProbabilityHandler : MonoBehaviour
 {
     public UnityEvent resultEvent;
 
     private float probability;
+    [SerializeField] private bool isSingleUse;
 
     public enum probabilityLevel
     {
@@ -20,9 +22,25 @@ public class ProbabilityHandler : MonoBehaviour
     [SerializeField] private probabilityLevel startLevel;
     [SerializeField] private probabilityLevel currentLevel;
 
+    private string auraSpriteTag = "Aura Sprite";
+    private Color auraColor;
+    private SpriteRenderer auraSpriteRenderer;
+
     private void Start()
     {
+        auraSpriteRenderer = GetComponentsInChildren<SpriteRenderer>().FirstOrDefault(s => s.CompareTag(auraSpriteTag));
+
+        if (auraSpriteRenderer == null)
+        {
+            Debug.LogWarning($"No child with tag '{auraSpriteTag}' found under {gameObject.name}.");
+        }
+
         SetProbabilityLevel(startLevel);
+    }
+
+    private void Update()
+    {
+        UpdateProbabilityLevel();
     }
 
     public void HandleProbabilityEvent()
@@ -32,6 +50,11 @@ public class ProbabilityHandler : MonoBehaviour
         if(randNum <= probability)
         {
             resultEvent.Invoke();
+
+            if(isSingleUse)
+            {
+                DisableProbabilityAura();
+            }
         }
     }
 
@@ -101,23 +124,38 @@ public class ProbabilityHandler : MonoBehaviour
         {
             case probabilityLevel.Red90:
                 probability = 0.90f;
+                auraColor = Color.softRed;
                 break;
 
             case probabilityLevel.Orange75:
                 probability = 0.75f;
+                auraColor = Color.orange;
                 break;
 
             case probabilityLevel.Yellow50:
                 probability = 0.50f;
+                auraColor = Color.yellow;
                 break;
 
             case probabilityLevel.Green25:
                 probability = 0.25f;
+                auraColor = Color.greenYellow;
                 break;
 
             case probabilityLevel.Blue0:
                 probability = 0.0f;
+                auraColor = Color.lightBlue;
                 break;
         }
+
+        if(auraSpriteRenderer != null)
+        {
+            auraSpriteRenderer.color = auraColor;
+        }
+    }
+
+    private void DisableProbabilityAura()
+    {
+        auraSpriteRenderer.gameObject.SetActive(false);
     }
 }

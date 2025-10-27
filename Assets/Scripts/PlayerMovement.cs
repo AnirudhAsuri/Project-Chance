@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float breakForce;
     private float excessSpeed;
+    private bool isFacingRight;
 
     [SerializeField] private float jumpForce;
     [SerializeField] private float jumpBufferTime;
@@ -80,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         HandlePlayerMovementV2();
+        TurnCheck();
         HandleGravity();
         Jump();
     }
@@ -149,6 +151,34 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void TurnCheck()
+    {
+        if(movementInput.x > 0 && !isFacingRight)
+        {
+            Turn();
+        }
+        else if(movementInput.x < 0 && isFacingRight)
+        {
+            Turn();
+        }
+    }
+
+    private void Turn()
+    {
+        if(isFacingRight)
+        {
+            Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(rotator);
+            isFacingRight = !isFacingRight;
+        }
+        else
+        {
+            Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(rotator);
+            isFacingRight = !isFacingRight;
+        }
+    }
+
     private void ApplyBrake(float speed)
     {
         if (Mathf.Abs(playerRigidBody.linearVelocityX) > 0.01f)
@@ -159,7 +189,6 @@ public class PlayerMovement : MonoBehaviour
         else 
             playerRigidBody.linearVelocityX = 0f;
     }
-
 
     private void AccelerationInAir()
     {
