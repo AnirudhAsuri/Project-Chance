@@ -6,7 +6,7 @@ public class ProbabilityHandler : MonoBehaviour
 {
     public UnityEvent resultEvent;
 
-    private float probability;
+    public float probability;
     [SerializeField] private bool isSingleUse;
 
     public enum probabilityLevel
@@ -36,11 +36,6 @@ public class ProbabilityHandler : MonoBehaviour
         }
 
         SetProbabilityLevel(startLevel);
-    }
-
-    private void Update()
-    {
-        UpdateProbabilityLevel();
     }
 
     public void HandleProbabilityEvent()

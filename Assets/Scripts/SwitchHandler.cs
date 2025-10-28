@@ -5,7 +5,7 @@ public class SwitchHandler : MonoBehaviour
 {
     private ProbabilityHandler probabilityHandler;
 
-    [SerializeField] private string playerTag = "Player";
+    [SerializeField] private string switchTag = "Switch";
     public UnityEvent switchTriggerEvent;
 
     private bool hasTriggered = false;
@@ -17,7 +17,7 @@ public class SwitchHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(playerTag) && !hasTriggered)
+        if (!collision.CompareTag(switchTag) && !hasTriggered)
         {
             hasTriggered = true;
             HandleSwitchTrigger();
@@ -26,7 +26,7 @@ public class SwitchHandler : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag(playerTag))
+        if (!collision.CompareTag(switchTag))
         {
             hasTriggered = false;
         }

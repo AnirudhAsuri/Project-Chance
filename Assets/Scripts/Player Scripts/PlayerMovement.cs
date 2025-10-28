@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         Jump();
     }
 
-    private void HandlePlayerMovement()
+    /*private void HandlePlayerMovement()
     {
         if(movementInput.magnitude > 0.1f)
         {
@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
             if(isGrounded)
                 playerRigidBody.linearVelocityX = 0f;
         }
-    }
+    }*/
 
     private void HandlePlayerMovementV2()
     {

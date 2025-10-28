@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 7575387487452863951}
   - component: {fileID: 6591023025053859064}
   m_Layer: 7
-  m_Name: Bomb Switch
+  m_Name: Switch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,7 +162,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c10d3edd529386842a86338ae3589e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwitchHandler
-  playerTag: Player
+  switchTag: Switch
   switchTriggerEvent:
     m_PersistentCalls:
       m_Calls:
@@ -275,7 +275,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isUsed: 0
+  probability: 0
+  isSingleUse: 0
   startLevel: 2
   currentLevel: 0
 --- !u!50 &6591023025053859064
@@ -383,7 +384,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
