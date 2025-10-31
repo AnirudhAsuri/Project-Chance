@@ -14,6 +14,8 @@ public class BombHandler : MonoBehaviour
 
     private string playerTag = "Player";
 
+    [SerializeField] private bool isMultipleUse;
+
     public void HandleBombBlowing()
     {
         float innerRadius = fieldOfImpactRadius * 0.33f;
@@ -58,7 +60,8 @@ public class BombHandler : MonoBehaviour
             }
         }
 
-        Destroy(gameObject);
+        if(!isMultipleUse)
+            Destroy(gameObject);
     }
 
     void OnDrawGizmosSelected()

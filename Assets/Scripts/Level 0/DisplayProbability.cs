@@ -24,8 +24,6 @@ public class DisplayProbability : MonoBehaviour
 
         if (currentProbabiltyValue != lastKnownProbabilityValue)
         {
-            Debug.Log("Moo");
-
             HandleProbabilityText();
         }
     }

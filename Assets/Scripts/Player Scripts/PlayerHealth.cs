@@ -48,6 +48,11 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void HealHealth(int healHealth)
+    {
+        currentCertaintyCells += healHealth;
+    }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green; Gizmos.DrawWireSphere(transform.position, probabilityIncreaseRange);
